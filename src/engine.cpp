@@ -2,7 +2,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_video.h>
 #include <iterator>
@@ -34,6 +36,8 @@ void Engine::loadTexture() {
     printf("Could not load media %s\n", IMG_GetError());
 
   } else {
+    SDL_SetColorKey(loadedSurface, SDL_TRUE,
+                    SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
     texture_ = SDL_CreateTextureFromSurface(renderer_, loadedSurface);
   }
   SDL_FreeSurface(loadedSurface);
