@@ -7,7 +7,6 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_video.h>
-#include <iterator>
 
 void Engine::initGraphics() {
   window_ = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_UNDEFINED,
