@@ -2,7 +2,7 @@
 
 #include <utility>
 #include <vector>
-enum Sprites { DIRT, WATER, ICE, FIRE };
+enum State { DIRT, WATER, ICE, FIRE };
 
 struct CTransform {
   std::pair<float, float> position = {0, 0};
@@ -11,5 +11,5 @@ struct CTransform {
 };
 
 struct CState {
-  Sprites state = DIRT;
+  State state = DIRT;
 };
