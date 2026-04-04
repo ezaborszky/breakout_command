@@ -1,12 +1,11 @@
 #pragma once
 #include "Engine.h"
+#include "EntityManager.h"
 #include <memory>
 
 class Game {
 public:
-  Game() : engine_(std::make_unique<Engine>()) {
-    calculateMaxTileDimensions();
-  };
+  Game() { calculateMaxTileDimensions(); };
   ~Game() {};
   void mainLoop();
   void run();
@@ -15,7 +14,8 @@ public:
   void generateBackGround(int frequency);
 
 private:
-  std::unique_ptr<Engine> engine_ = nullptr;
+  Engine engine_;
+  EntityManager entityManager_;
   int maxTileWidth_ = 0;
   int maxTileHeight_ = 0;
 };
