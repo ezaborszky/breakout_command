@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include <SDL2/SDL_rect.h>
 #include <utility>
 
 void Entity::setPosition(float x, float y) { transform_->position = {x, y}; }
@@ -29,3 +30,26 @@ void Entity::setMaxHp(int hp) {
   state_->maxHP = hp;
   state_->HP = hp;
 }
+
+int Entity::getMaxHp() { return state_->maxHP; }
+
+int Entity::getHp() { return state_->HP; }
+
+void Entity::setSize(float size) {
+  transform_->size.first *= size;
+  transform_->size.second *= size;
+}
+
+SDL_Rect Entity::getDimensions() {
+  SDL_Rect dimensions;
+  dimensions.x = transform_->position.first;
+  dimensions.y = transform_->position.second;
+  dimensions.w = transform_->size.first;
+  dimensions.h = transform_->size.second;
+
+  return dimensions;
+}
+
+int Entity::getZIndex() { return transform_->zIndex; }
+
+void Entity::setZIndex(int z) { transform_->zIndex = z; }
