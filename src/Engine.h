@@ -12,6 +12,7 @@ public:
   SDL_Renderer *renderer_ = nullptr;
   SDL_Window *window_ = nullptr;
   void renderBackground();
+  std::pair<int, int> getScreenDimensions();
 
 private:
   const int SCREEN_WIDTH_ = 1024;

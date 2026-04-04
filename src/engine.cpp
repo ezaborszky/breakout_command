@@ -30,7 +30,7 @@ void Engine::initGraphics() {
 }
 
 void Engine::loadTexture() {
-  SDL_Surface *loadedSurface = IMG_Load("./media/texture_atlas.png");
+  SDL_Surface *loadedSurface = IMG_Load("./media/sprites.png");
   if (loadedSurface == nullptr) {
     printf("Could not load media %s\n", IMG_GetError());
 
@@ -63,4 +63,8 @@ Engine::~Engine() {
   renderer_ = nullptr;
   IMG_Quit();
   SDL_Quit();
+}
+
+std::pair<int, int> Engine::getScreenDimensions() {
+  return {SCREEN_WIDTH_, SCREEN_HEIGHT_};
 }
