@@ -12,6 +12,7 @@ public:
   void run();
   SDL_Event e_;
   void calculateMaxTileDimensions();
+  void generateBackGround(int frequency);
 
 private:
   std::unique_ptr<Engine> engine_ = nullptr;
