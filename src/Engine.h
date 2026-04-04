@@ -2,6 +2,22 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 
+enum Sprites {
+  PADDLE_LEFT = 5,
+  PADDLE_MIDDLE = 6,
+  PADDLE_RIGHT = 7,
+  BLOCK_FULL = 0,
+  BLOCK_DAMAGED = 1,
+  BLOCK_BADLY_DAMAGED = 2,
+  YELLOW_STAR = 10,
+  WHITE_STAR = 11,
+  SMALL_STAR = 12,
+  GALAXY_1 = 13,
+  GALAXY_2 = 14,
+  PLANET_1 = 15,
+  PLANET_2 = 16
+};
+
 class Engine {
 public:
   Engine();
