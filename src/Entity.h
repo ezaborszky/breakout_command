@@ -18,6 +18,7 @@ public:
   State getState() const;
   void destroy();
   bool isActive();
+  void setMaxHp(int hp);
 
 private:
   std::unique_ptr<CTransform> transform_ = nullptr;

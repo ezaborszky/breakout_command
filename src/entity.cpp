@@ -24,3 +24,8 @@ float Entity::getSpeed() const { return transform_->speed; }
 State Entity::getState() const { return state_->state; }
 
 void Entity::destroy() { active_ = false; }
+
+void Entity::setMaxHp(int hp) {
+  state_->maxHP = hp;
+  state_->HP = hp;
+}
