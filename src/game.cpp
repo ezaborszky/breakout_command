@@ -16,3 +16,10 @@ void Game::mainLoop() {
 }
 
 void Game::run() { mainLoop(); }
+
+void Game::calculateMaxTileDimensions() {
+  int screen_width = engine_->getScreenDimensions().first;
+  int screen_height = engine_->getScreenDimensions().second;
+  maxTileHeight_ = screen_height / 16;
+  maxTileWidth_ = screen_width / 16;
+}
