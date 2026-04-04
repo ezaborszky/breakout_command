@@ -12,4 +12,6 @@ struct CTransform {
 
 struct CState {
   State state = DIRT;
+  int maxHP = 3;
+  int HP = 3;
 };
