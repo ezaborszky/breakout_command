@@ -4,15 +4,21 @@
 #include <memory>
 #include <string>
 #include <vector>
+
+typedef std::vector<std::shared_ptr<Entity>> EntityVec;
+typedef std::map<std::string, EntityVec> EntityMap;
 class EntityManager {
 public:
-  std::unique_ptr<Entity> createEntity();
-  std::vector<Entity> getEntitites();
-  std::vector<Entity> getEntitites(std::string &tag);
-  void createEntity(std::string &tag);
+  EntityManager();
+  ~EntityManager();
+  std::shared_ptr<Entity> createEntity(std::string tag, EntityType type);
+  EntityVec &getEntities();
+  EntityVec &getEntities(const std::string &tag);
   void updateEntities();
+  void removeDeadEntities(EntityVec &entities);
 
 private:
-  std::vector<Entity> entityVector;
-  std::map<std::string, std::vector<Entity>> entityMap;
+  EntityVec entityVector_;
+  EntityVec entitiesToAdd_;
+  EntityMap entityMap_;
 };

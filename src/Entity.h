@@ -29,6 +29,7 @@ public:
   SDL_Rect getDimensions();
   int getZIndex();
   void setZIndex(int z);
+  std::string getTag() { return tag_; };
 
 private:
   std::unique_ptr<CTransform> transform_ = nullptr;

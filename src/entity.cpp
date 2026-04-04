@@ -53,3 +53,5 @@ SDL_Rect Entity::getDimensions() {
 int Entity::getZIndex() { return transform_->zIndex; }
 
 void Entity::setZIndex(int z) { transform_->zIndex = z; }
+
+bool Entity::isActive() { return active_; }
