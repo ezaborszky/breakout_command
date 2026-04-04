@@ -1,6 +1,8 @@
 #pragma once
+#include "EntityManager.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
+#include <memory>
 
 enum Sprites {
   PADDLE_LEFT = 5,
@@ -27,8 +29,12 @@ public:
   SDL_Texture *texture_ = nullptr;
   SDL_Renderer *renderer_ = nullptr;
   SDL_Window *window_ = nullptr;
-  void renderBackground();
   std::pair<int, int> getScreenDimensions();
+
+  // rendering
+  void clear();
+  void renderBackground(std::shared_ptr<Entity> entity);
+  void render(EntityVec &entities);
 
 private:
   const int SCREEN_WIDTH_ = 1024;

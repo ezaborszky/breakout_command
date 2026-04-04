@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "EntityManager.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_image.h>
@@ -7,6 +8,7 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_video.h>
+#include <memory>
 
 void Engine::initGraphics() {
   window_ = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_UNDEFINED,
@@ -42,7 +44,7 @@ void Engine::loadTexture() {
   SDL_FreeSurface(loadedSurface);
 }
 
-void Engine::renderBackground() {
+void Engine::clear() {
   SDL_RenderClear(renderer_);
   SDL_Rect fillRect = {0, 0, SCREEN_WIDTH_, SCREEN_HEIGHT_};
   SDL_SetRenderDrawColor(renderer_, 0xFF, 0x00, 0x00, 0xFF);
@@ -68,3 +70,7 @@ Engine::~Engine() {
 std::pair<int, int> Engine::getScreenDimensions() {
   return {SCREEN_WIDTH_, SCREEN_HEIGHT_};
 }
+
+void Engine::renderBackground(std::shared_ptr<Entity> entity) { int i; }
+
+void Engine::render(EntityVec &entities) { clear(); }
