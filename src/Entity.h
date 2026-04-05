@@ -34,6 +34,7 @@ public:
   int getZIndex();
   void setZIndex(int z);
   std::string getTag() { return tag_; }
+  int getHorizontalMiddle();
 
   EntityType getType() { return type_; }
   std::shared_ptr<CTransform> transform_ = nullptr;

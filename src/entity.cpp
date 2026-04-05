@@ -159,3 +159,8 @@ void Entity::setZIndex(int z) {
 }
 
 bool Entity::isActive() { return active_; }
+
+int Entity::getHorizontalMiddle() {
+  int width = transform_->size.first * state_->width;
+  return (transform_->position.first + (width / 2.f));
+}

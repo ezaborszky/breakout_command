@@ -124,3 +124,10 @@ void Game::paralax() {
     }
   }
 }
+
+void Game::spawnPlayer() {
+  auto player = entityManager_.createEntity("player", EntityType::PLAYER);
+  player->transform_ = std::make_shared<CTransform>();
+  player->state_ = std::make_shared<CState>();
+  player->graphics_ = std::make_shared<CGraphics>();
+}

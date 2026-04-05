@@ -19,6 +19,7 @@ struct CState {
   State state = DIRT;
   int maxHP = 3;
   int HP = 3;
+  int width = 1;
 };
 
 struct CGraphics {
