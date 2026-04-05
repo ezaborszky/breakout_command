@@ -8,6 +8,7 @@ enum State { DIRT, WATER, ICE, FIRE };
 
 struct CTransform {
   std::pair<float, float> position = {0, 0};
+  std::pair<float, float> originalPosition = {0, 0};
   std::pair<float, float> directionVector = {0, 0};
   float speed = 0;
   std::pair<float, float> size = {64, 64};
