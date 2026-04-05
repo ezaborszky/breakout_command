@@ -33,7 +33,7 @@ public:
 
   // rendering
   void clear();
-  void renderBackground(std::shared_ptr<Entity> entity);
+  void renderEntities(EntityVec &entities);
   void render(EntityVec &entities);
 
 private:

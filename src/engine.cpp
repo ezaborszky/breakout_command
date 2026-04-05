@@ -1,9 +1,11 @@
 #include "Engine.h"
 #include "EntityManager.h"
+#include "Utility.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_surface.h>
@@ -47,7 +49,7 @@ void Engine::loadTexture() {
 void Engine::clear() {
   SDL_RenderClear(renderer_);
   SDL_Rect fillRect = {0, 0, SCREEN_WIDTH_, SCREEN_HEIGHT_};
-  SDL_SetRenderDrawColor(renderer_, 0xFF, 0x00, 0x00, 0xFF);
+  SDL_SetRenderDrawColor(renderer_, 0x00, 0x00, 0x00, 0xFF);
   SDL_RenderFillRect(renderer_, &fillRect);
 }
 
@@ -71,6 +73,17 @@ std::pair<int, int> Engine::getScreenDimensions() {
   return {SCREEN_WIDTH_, SCREEN_HEIGHT_};
 }
 
-void Engine::renderBackground(std::shared_ptr<Entity> entity) { int i; }
+void Engine::renderEntities(EntityVec &entities) {
+  for (auto a : entities) {
+    SDL_Rect crop =
+        calcTilePos(a->graphics_->possibleSprites[a->graphics_->currentSprite]);
+    SDL_Rect pos = a->getDimensions();
+    SDL_RenderCopy(renderer_, texture_, &crop, &pos);
+  }
+}
 
-void Engine::render(EntityVec &entities) { clear(); }
+void Engine::render(EntityVec &entities) {
+  clear();
+  renderEntities(entities);
+  SDL_RenderPresent(renderer_);
+}
