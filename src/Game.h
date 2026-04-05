@@ -12,6 +12,7 @@ public:
   SDL_Event e_;
   void calculateMaxTileDimensions();
   void generateBackGround(int frequency);
+  void paralax();
 
 private:
   Engine engine_;
