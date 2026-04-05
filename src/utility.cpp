@@ -11,10 +11,10 @@ int generateRandom(int min, int max) {
 SDL_Rect calcTilePos(int tile) {
   int x = tile % 5;
   int y = tile / 5;
-  x *= 32;
-  y *= 32;
+  x *= 64;
+  y *= 64;
 
-  SDL_Rect crop = {x, y, 32, 32};
+  SDL_Rect crop = {x, y, 64, 64};
   return crop;
 }
 
