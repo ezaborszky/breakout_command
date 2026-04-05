@@ -16,6 +16,7 @@ public:
   EntityVec &getEntities(const std::string &tag);
   void updateEntities();
   void removeDeadEntities(EntityVec &entities);
+  void printEntityCount();
 
 private:
   EntityVec entityVector_;
