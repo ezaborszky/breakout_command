@@ -1,6 +1,7 @@
 #include "Utility.h"
 #include <cmath>
 #include <random>
+#include <unistd.h>
 
 int generateRandom(int min, int max) {
   static std::mt19937 rng(std::random_device{}());
@@ -29,4 +30,26 @@ double calculateDistance(std::pair<int, int> pointA,
   int a = (pointA.first - pointB.first);
   int b = (pointA.second - pointB.second);
   return std::sqrt(a * a + b * b);
+}
+
+bool circleRectangleCollision(boundingBox box, int cx, int cy, int r) {
+  bool collision = false;
+  int closeX, closeY;
+  closeX = cx;
+  closeY = cy;
+  if (cx > box.x + box.w) {
+    closeX = box.x + box.w;
+  } else if (cx < box.x) {
+    closeX = box.x;
+  }
+
+  if (cy > box.y + box.h) {
+    closeY = box.y + box.h;
+  } else if (cy < box.y) {
+    closeY = box.y;
+  }
+
+  double distance = calculateDistance({box.x, box.y}, {cx, cy});
+  collision = (distance <= r);
+  return collision;
 }

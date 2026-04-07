@@ -6,6 +6,13 @@
 
 enum State { DIRT, WATER, ICE, FIRE };
 
+struct boundingBox {
+  float x = 0;
+  float y = 0;
+  float w = 0;
+  float h = 0;
+};
+
 struct CTransform {
   std::pair<float, float> position = {0, 0};
   std::pair<float, float> originalPosition = {0, 0};
@@ -13,6 +20,7 @@ struct CTransform {
   float speed = 0;
   std::pair<float, float> size = {64, 64};
   int zIndex = 1;
+  boundingBox boundingbox;
 };
 
 struct CState {

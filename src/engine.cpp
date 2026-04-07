@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "Entity.h"
 #include "EntityManager.h"
 #include "Utility.h"
 #include <SDL2/SDL.h>
@@ -75,6 +76,8 @@ std::pair<int, int> Engine::getScreenDimensions() {
 
 void Engine::renderEntities(EntityVec &entities) {
   for (auto a : entities) {
+    if (a->getTag() == "player")
+      continue;
     SDL_Rect crop =
         calcTilePos(a->graphics_->possibleSprites[a->graphics_->currentSprite]);
     SDL_Rect pos = a->getDimensions();
@@ -82,8 +85,29 @@ void Engine::renderEntities(EntityVec &entities) {
   }
 }
 
-void Engine::render(EntityVec &entities) {
+void Engine::renderPlayer(std::shared_ptr<Entity> player) {
+  for (int i = 0; i < player->state_->width; ++i) {
+    int last = player->state_->width - 1;
+    // set sprite to corresponding part of paddle
+    if (i == 0) {
+      player->graphics_->currentSprite = 0;
+    } else if (i == player->state_->width - 1) {
+      player->graphics_->currentSprite = 2;
+    } else {
+      player->graphics_->currentSprite = 1;
+    }
+    int spriteWidth = player->transform_->size.first;
+    SDL_Rect pos = player->getDimensions();
+    pos.x += spriteWidth * i;
+    SDL_Rect crop = calcTilePos(
+        player->graphics_->possibleSprites[player->graphics_->currentSprite]);
+    SDL_RenderCopy(renderer_, texture_, &crop, &pos);
+  }
+}
+
+void Engine::render(EntityVec &entities, std::shared_ptr<Entity> player) {
   clear();
   renderEntities(entities);
+  renderPlayer(player);
   SDL_RenderPresent(renderer_);
 }

@@ -5,12 +5,15 @@
 #include "Utility.h"
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_mouse.h>
+#include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_timer.h>
 #include <algorithm>
 #include <cstdlib>
 #include <memory>
 #include <string>
 
 void Game::mainLoop() {
+  Uint32 time = SDL_GetTicks();
   bool windowOpen = true;
   while (windowOpen) {
     while (SDL_PollEvent(&e_) != 0) {
@@ -20,12 +23,17 @@ void Game::mainLoop() {
     }
     paralax();
     entityManager_.updateEntities();
-    engine_.render(entityManager_.getEntities());
+
+    playerMovement();
+    engine_.render(entityManager_.getEntities(),
+                   entityManager_.getEntities("player")[0]);
+    engine_.renderPlayer(entityManager_.getEntities("player")[0]);
   }
 }
 
 void Game::run() {
   generateBackGround(200);
+  spawnPlayer();
   mainLoop();
 }
 
@@ -130,4 +138,17 @@ void Game::spawnPlayer() {
   player->transform_ = std::make_shared<CTransform>();
   player->state_ = std::make_shared<CState>();
   player->graphics_ = std::make_shared<CGraphics>();
+  player->setPosition(500, engine_.getScreenDimensions().second - 64);
+  player->graphics_->possibleSprites = {
+      Sprites::PADDLE_LEFT, Sprites::PADDLE_MIDDLE, Sprites::PADDLE_RIGHT};
+  player->state_->width = 6;
+  player->setSize(0.5f);
+}
+
+void Game::playerMovement() {
+  int x, y;
+  SDL_GetMouseState(&x, &y);
+  int maxWidth = engine_.getScreenDimensions().first;
+  maxWidth;
+  entityManager_.getEntities("player")[0]->setHorizontalMiddle(x);
 }

@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include "Component.h"
+#include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_rect.h>
 #include <utility>
 
@@ -161,6 +162,16 @@ void Entity::setZIndex(int z) {
 bool Entity::isActive() { return active_; }
 
 int Entity::getHorizontalMiddle() {
-  int width = transform_->size.first * state_->width;
-  return (transform_->position.first + (width / 2.f));
+  if (transform_) {
+    int width = transform_->size.first * state_->width;
+    return (transform_->position.first + (width / 2.f));
+  } else {
+    return -1;
+  }
+}
+
+void Entity::setHorizontalMiddle(int x) {
+  int halfWidth = (transform_->size.first * state_->width) / 2;
+  int y = getPosition().second;
+  setPosition(x, y);
 }

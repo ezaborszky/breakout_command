@@ -34,7 +34,8 @@ public:
   // rendering
   void clear();
   void renderEntities(EntityVec &entities);
-  void render(EntityVec &entities);
+  void renderPlayer(std::shared_ptr<Entity> player);
+  void render(EntityVec &entities, std::shared_ptr<Entity> player);
 
 private:
   const int SCREEN_WIDTH_ = 1024;
