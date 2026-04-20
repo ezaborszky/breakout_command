@@ -17,7 +17,8 @@ enum Sprites {
   GALAXY_1 = 13,
   GALAXY_2 = 14,
   PLANET_1 = 15,
-  PLANET_2 = 16
+  PLANET_2 = 16,
+  BALL_1 = 17
 };
 
 class Engine {
