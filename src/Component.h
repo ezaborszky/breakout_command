@@ -21,6 +21,7 @@ struct CTransform {
   std::pair<float, float> size = {64, 64};
   int zIndex = 1;
   boundingBox boundingbox;
+  float radius = 5;
 };
 
 struct CState {
