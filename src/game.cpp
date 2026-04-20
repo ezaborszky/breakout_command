@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <memory>
 #include <string>
+#include <utility>
 
 void Game::mainLoop() {
   Uint32 time = SDL_GetTicks();
@@ -23,7 +24,7 @@ void Game::mainLoop() {
     }
     paralax();
     entityManager_.updateEntities();
-
+    entityManager_.getEntities("player")[0]->updateDimensions();
     playerMovement();
     engine_.render(entityManager_.getEntities(),
                    entityManager_.getEntities("player")[0]);
@@ -34,6 +35,8 @@ void Game::mainLoop() {
 void Game::run() {
   generateBackGround(200);
   spawnPlayer();
+  entityManager_.updateEntities();
+  spawnBall();
   mainLoop();
 }
 
@@ -145,10 +148,23 @@ void Game::spawnPlayer() {
   player->setSize(0.5f);
 }
 
+void Game::spawnBall() {
+  auto ball = entityManager_.createEntity("ball", EntityType::BALL);
+  ball->transform_ = std::make_shared<CTransform>();
+  ball->state_ = std::make_shared<CState>();
+  ball->graphics_ = std::make_shared<CGraphics>();
+  auto player = entityManager_.getEntities("player")[0];
+  ball->graphics_->possibleSprites = {Sprites::BALL_1};
+  ball->setZIndex(5);
+  printf("ball\n");
+}
+
+//[ ]TODO PLAYER MOVEMENT screen boundaries
 void Game::playerMovement() {
   int x, y;
   SDL_GetMouseState(&x, &y);
   int maxWidth = engine_.getScreenDimensions().first;
-  maxWidth;
-  entityManager_.getEntities("player")[0]->setHorizontalMiddle(x);
+  auto player = entityManager_.getEntities("player")[0];
+  if (x + player->transform_->boundingbox.w <= maxWidth)
+    player->setHorizontalMiddle(x);
 }

@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "EntityManager.h"
 #include <SDL2/SDL_stdinc.h>
+#include <cstdint>
 #include <memory>
 #include <vector>
 
@@ -17,6 +18,8 @@ public:
   void paralax();
   void spawnPlayer();
   void playerMovement();
+  std::pair<int, int> measureSpeed(std::shared_ptr<Entity> entity, Uint32 time);
+  void spawnBall();
 
 private:
   Engine engine_;
