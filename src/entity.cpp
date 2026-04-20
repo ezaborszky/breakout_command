@@ -175,3 +175,12 @@ void Entity::setHorizontalMiddle(int x) {
   int y = getPosition().second;
   setPosition(x, y);
 }
+
+void Entity::updateDimensions() {
+  float width = transform_->size.first * state_->width;
+  float height = transform_->size.second;
+  float x = transform_->position.first;
+  float y = transform_->position.second;
+
+  transform_->boundingbox = {x, y, width, height};
+}

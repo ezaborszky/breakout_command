@@ -6,7 +6,7 @@
 #include <utility>
 #include <vector>
 
-enum EntityType { PLAYER, BLOCK, BACKGROUND };
+enum EntityType { PLAYER, BLOCK, BACKGROUND, BALL };
 
 class Entity {
 
@@ -37,6 +37,7 @@ public:
   int getHorizontalMiddle();
   void setHorizontalMiddle(int x);
   int getWidth();
+  void updateDimensions();
 
   EntityType getType() { return type_; }
   std::shared_ptr<CTransform> transform_ = nullptr;
